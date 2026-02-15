@@ -20,7 +20,6 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -49,6 +48,7 @@
       width: 100%;
       background: rgba(10, 22, 40, 0.95);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       z-index: 1000;
       padding: 1.1rem 0;
       border-bottom: 1px solid rgba(212, 165, 165, 0.2);
@@ -234,6 +234,7 @@
       padding: 2rem;
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(212, 165, 165, 0.2);
       border-radius: 2px;
     }
@@ -253,6 +254,19 @@
       font-weight: 500;
       letter-spacing: 0.5px;
       line-height: 1.35;
+    }
+
+    .meta-value a {
+      color: var(--white);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,165,165,0.45);
+      padding-bottom: 2px;
+      transition: all 0.25s ease;
+    }
+
+    .meta-value a:hover {
+      color: var(--pink-accent);
+      border-bottom-color: rgba(212,165,165,0.9);
     }
 
     .attire-note {
@@ -465,7 +479,7 @@
       line-height: 1.9;
     }
 
-    /* INFO CARD (replaces embeds) */
+    /* INFO CARD */
     .action-card {
       background: var(--white);
       padding: 3.2rem;
@@ -544,11 +558,38 @@
       background: rgba(255, 255, 255, 0.05);
     }
 
-    .detail-icon {
-      font-size: 2.2rem;
-      margin-bottom: 1.3rem;
-      opacity: 0.95;
+    /* Frosted icon badge */
+    .icon-badge {
+      width: 68px;
+      height: 68px;
+      border-radius: 999px;
+      margin: 0 auto 1.3rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(212,165,165,0.28);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .icon-badge::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.22), transparent 55%);
+      pointer-events: none;
+      transform: rotate(18deg);
+    }
+
+    .icon-badge svg {
+      width: 30px;
+      height: 30px;
       color: rgba(212,165,165,0.95);
+      position: relative;
+      z-index: 1;
     }
 
     .detail-card h3 {
@@ -880,6 +921,19 @@
 
     .footer-info p { margin-bottom: 1rem; line-height: 1.8; }
 
+    .footer-info a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,165,165,0.35);
+      padding-bottom: 2px;
+      transition: all 0.25s ease;
+    }
+
+    .footer-info a:hover {
+      color: var(--pink-accent);
+      border-bottom-color: rgba(212,165,165,0.95);
+    }
+
     .footer-bottom {
       text-align: center;
       margin-top: 4rem;
@@ -888,6 +942,19 @@
       font-size: 0.85rem;
       color: rgba(255, 255, 255, 0.4);
       line-height: 1.8;
+    }
+
+    .footer-bottom a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,165,165,0.35);
+      padding-bottom: 2px;
+      transition: all 0.25s ease;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--pink-accent);
+      border-bottom-color: rgba(212,165,165,0.95);
     }
 
     .contact-form input,
@@ -1006,7 +1073,11 @@
         </div>
         <div class="meta-item">
           <div class="meta-label">Venue</div>
-          <div class="meta-value">Dreamy Event Center<br/>12115 Rojas Dr, El Paso, TX</div>
+          <div class="meta-value">
+            <a href="https://www.google.com/maps?q=12115%20Rojas%20Dr%2C%20El%20Paso%2C%20TX%2079997" target="_blank" rel="noopener">
+              Dreamy Event Center
+            </a>
+          </div>
         </div>
         <div class="meta-item">
           <div class="meta-label">Investment</div>
@@ -1046,7 +1117,7 @@
     </div>
   </section>
 
-  <!-- WHERE YOUR SUPPORT GOES (moved up) -->
+  <!-- WHERE YOUR SUPPORT GOES -->
   <section class="split-impact">
     <div class="container">
       <div class="section-header">
@@ -1123,7 +1194,7 @@
     </div>
   </section>
 
-  <!-- EVENT DETAILS (3 cards only) -->
+  <!-- EVENT DETAILS (improved icons + frosted effect) -->
   <section id="event" class="event-details">
     <div class="container">
       <div class="section-header">
@@ -1133,19 +1204,42 @@
 
       <div class="details-grid">
         <div class="detail-card">
-          <div class="detail-icon">◆</div>
+          <div class="icon-badge" aria-hidden="true">
+            <!-- cocktail glass (mature line icon) -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 3h10l-4 7v8a2 2 0 0 0 2 2h1"/>
+              <path d="M11 20h2"/>
+              <path d="M7 3l5 7 5-7"/>
+            </svg>
+          </div>
           <h3>Reception</h3>
           <p>Arrival &amp; welcome<br>signature cocktails &amp; mocktails<br>social + photo moments</p>
         </div>
 
         <div class="detail-card">
-          <div class="detail-icon">◆</div>
+          <div class="icon-badge" aria-hidden="true">
+            <!-- cloche / serving dish -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 13a6 6 0 0 1 12 0"/>
+              <path d="M4 13h16"/>
+              <path d="M3 18h18"/>
+              <path d="M12 7V6"/>
+            </svg>
+          </div>
           <h3>Small Plates + Sweets</h3>
           <p>Buffet-style small plates<br>treats &amp; desserts<br>served throughout the evening</p>
         </div>
 
         <div class="detail-card">
-          <div class="detail-icon">◆</div>
+          <div class="icon-badge" aria-hidden="true">
+            <!-- bingo card -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="4" width="12" height="16" rx="2"/>
+              <path d="M9 8h.01M12 8h.01M15 8h.01"/>
+              <path d="M9 12h.01M12 12h.01M15 12h.01"/>
+              <path d="M9 16h.01M12 16h.01M15 16h.01"/>
+            </svg>
+          </div>
           <h3>Bougie Bingo + Auction</h3>
           <p>Multiple bingo rounds<br>luxury prizes + surprises<br>silent auction fun</p>
         </div>
@@ -1179,13 +1273,12 @@
     </div>
   </section>
 
-  <!-- BENEFICIARY (upgraded) -->
+  <!-- BENEFICIARY -->
   <section class="beneficiary-section">
     <div class="beneficiary-photo"></div>
 
     <div class="container beneficiary-content">
       <div class="beneficiary-logo" aria-label="Boys & Girls Club logo">
-        <!-- OPTIONAL: Replace src with the official Boys & Girls Club logo URL or a local image -->
         <img src="" alt="" onerror="this.style.display='none'; document.getElementById('bgc-fallback').style.display='block';">
         <div id="bgc-fallback" class="beneficiary-fallback" style="display:none;">BGC</div>
       </div>
@@ -1199,7 +1292,7 @@
   <section id="sponsor" class="sponsorship-section">
     <div class="container">
       <div class="section-header">
-        <h2>Partnership Opportunities</h2>
+        <h2>Sponsorship Opportunities</h2>
         <p>Select a sponsorship level through Zeffy. Each level helps expand youth impact and supports national initiatives.</p>
       </div>
 
@@ -1261,19 +1354,23 @@
       <div class="footer-section">
         <h4>Connect</h4>
         <div class="social-links">
-          <a href="#" aria-label="Facebook">f</a>
-          <a href="#" aria-label="Instagram">📷</a>
+          <a href="https://www.facebook.com/epsnm/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+          <a href="https://www.instagram.com/epsnmjjoa/" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
         </div>
         <a href="https://www.zeffy.com/en-US/ticketing/bougie-bingo" target="_blank" rel="noopener" class="btn btn-outline footer-btn">Share Event</a>
-        <a href="#" class="btn btn-primary footer-btn">Download Flyer</a>
+        <a href="https://www.canva.com/design/DAHBT4qtN1s/iuilpZBNjEGsAlLZ4wJn3Q/view?utm_content=DAHBT4qtN1s&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h28e0baa7f9"
+           target="_blank" rel="noopener"
+           class="btn btn-primary footer-btn">View Flyer</a>
       </div>
 
       <div class="footer-section">
         <h4>Inquire</h4>
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks! This form is a placeholder.');">
-          <input type="text" placeholder="Full Name" required />
-          <input type="email" placeholder="Email Address" required />
-          <textarea rows="3" placeholder="Message" required></textarea>
+        <!-- Note: This opens the user's email client (mailto). For true form delivery without an email client,
+             you'd need a backend or a form service. -->
+        <form class="contact-form" id="inquiryForm">
+          <input type="text" id="inqName" placeholder="Full Name" required />
+          <input type="email" id="inqEmail" placeholder="Email Address" required />
+          <textarea rows="3" id="inqMessage" placeholder="Message" required></textarea>
           <button type="submit">Send</button>
         </form>
       </div>
@@ -1281,8 +1378,12 @@
       <div class="footer-section footer-info">
         <h4>Chapter Information</h4>
         <p><strong>Jack and Jill of America, Inc.</strong><br/>El Paso–Southern New Mexico Chapter</p>
-        <p>P.O. Box [Number]<br/>El Paso, Texas [Zip]</p>
-        <p>epsnm@jackandjillinc.org<br/>(915) [Phone Number]</p>
+        <p>PO Box 972174<br/>El Paso, TX 79997</p>
+        <p>
+          <a href="https://www.jackandjillinc.org/chapter/elpasosouthernnewmexico/" target="_blank" rel="noopener">
+            Chapter Website
+          </a>
+        </p>
       </div>
     </div>
 
@@ -1291,6 +1392,8 @@
       <p>
         The El Paso–Southern New Mexico Chapter is a 501(c)(4) organization.
         The Jack and Jill of America Foundation is a 501(c)(3) organization.
+        &nbsp;•&nbsp;
+        <a href="https://www.jackandjillinc.org/chapter/elpasosouthernnewmexico/" target="_blank" rel="noopener">jackandjillinc.org</a>
       </p>
     </div>
   </footer>
@@ -1312,6 +1415,36 @@
       }, observerOptions);
 
       observer.observe(progressBar);
+    }
+
+    // Inquiry form -> opens mail client with pre-filled email to 3 addresses
+    const inquiryForm = document.getElementById('inquiryForm');
+    if (inquiryForm) {
+      inquiryForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('inqName').value.trim();
+        const email = document.getElementById('inqEmail').value.trim();
+        const message = document.getElementById('inqMessage').value.trim();
+
+        const recipients = "jjoaespnmfc@gmail.com,jjoaepsnmvp@gmail.com,jjpreselpsnm@gmail.com";
+        const fallbackRecipient = "jjoaespnmfc@gmail.com";
+
+        const subject = encodeURIComponent("Bougie Bingo Inquiry");
+        const body = encodeURIComponent(
+          `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n— Sent from the Bougie Bingo website inquiry form`
+        );
+
+        // Attempt multi-recipient mailto first; if anything fails, fallback to primary
+        const mailtoMulti = `mailto:${recipients}?subject=${subject}&body=${body}`;
+        const mailtoSingle = `mailto:${fallbackRecipient}?subject=${subject}&body=${body}`;
+
+        try {
+          window.location.href = mailtoMulti;
+        } catch (err) {
+          window.location.href = mailtoSingle;
+        }
+      });
     }
   </script>
 
